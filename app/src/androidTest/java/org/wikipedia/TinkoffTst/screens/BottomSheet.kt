@@ -9,6 +9,7 @@ import org.wikipedia.R
 class BottomSheet {
     private val donateButton by lazy { onView(withId(R.id.main_drawer_donate_container)) }
     private val settingsButton by lazy { onView(withId(R.id.main_drawer_settings_container)) }
+    private val loginButton by lazy { onView(withId(R.id.main_drawer_login_button)) }
 
     fun clickDonateButton() {
         step("Нажимаем на кнопку \"Пожертвовать\"") {
@@ -19,6 +20,12 @@ class BottomSheet {
     fun clickSettingsButton() {
         step("Нажимаем на кнопку \"Настройки\"") {
             settingsButton.perform(click())
+        }
+    }
+
+    fun clickLoginButton()  {
+        step("Нажимаем на кнопку \"Создать учётную запись\"") {
+            loginButton.perform(click())
         }
     }
 

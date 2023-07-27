@@ -14,10 +14,12 @@ import org.junit.Test
 import org.wikipedia.TinkoffTst.screens.AboutScreen
 import org.wikipedia.main.MainActivity
 import org.wikipedia.TinkoffTst.screens.BottomSheet
+import org.wikipedia.TinkoffTst.screens.CreateAccountScreen
 import org.wikipedia.TinkoffTst.screens.NavigationBar
 import org.wikipedia.TinkoffTst.screens.SettingFeedScreen
 import org.wikipedia.TinkoffTst.screens.SettingsScreen
 import org.wikipedia.settings.Prefs
+
 
 
 /*
@@ -113,6 +115,28 @@ class Tests {
         }
     }
 
+    @Test
+    @AllureId("5")
+    @DisplayName("Проверка валидации поля установки пароля")
+    fun testValidationPasswordField() {
+
+        NavigationBar {
+            clickMoreButton()
+        }
+
+        BottomSheet {
+            clickLoginButton()
+        }
+
+        CreateAccountScreen {
+            typeUsername("Smth.username")
+            typePassword("pass12")
+            typeRepeatPassword("pass12")
+            typeEmail("smth.email@gmail.com")
+            clickNextButton()
+
+        }
+    }
 
 
 
