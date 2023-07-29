@@ -1,5 +1,6 @@
 package org.wikipedia.TinkoffTst
 
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
@@ -19,7 +20,6 @@ import org.wikipedia.TinkoffTst.screens.NavigationBar
 import org.wikipedia.TinkoffTst.screens.SettingFeedScreen
 import org.wikipedia.TinkoffTst.screens.SettingsScreen
 import org.wikipedia.settings.Prefs
-
 
 
 /*
@@ -43,6 +43,16 @@ import org.wikipedia.settings.Prefs
 + 3. Нажимаем настройки
 + 4. Нажимаем на "О приложении "Википедия""
 + 5. Проверяем, что на экране есть блок "Авторы", "Переводчики" и "Лицензия"
+-----------------------------------------------------------------------------
+Проверка, что пароль скрывается, если нажать на глазик два раза
++ 1. Открываем приложение
++ 2. Нажимаем на кнопку «Еще»
++ 3. Нажимаем "Создать учетную запись"
++ 4. Заполняем поле пароля любимыми данными
++ 5. Нажимаем иконку "глазик"
++ 6. Проверяем что отображается введенный пароль
++ 7. Нажимаем иконку "глазик"
++ 8. Проверяем, что отображаются точки (пароль скрыт)
  */
 
 @Epic("Tinkoff")
@@ -95,6 +105,7 @@ class Tests {
     @AllureId("3")
     @DisplayName("Проверка блоков на экране \"О приложении\"")
     fun testCheckBlocksOnAboutAppScreen() {
+
         NavigationBar {
             clickMoreButton()
         }
@@ -112,6 +123,26 @@ class Tests {
             checkContributorsIsDisplayed()
             checkTranslatorsIsDisplayed()
             checkLicenseIsDisplayed()
+        }
+        
+    }
+
+    @Test
+    @AllureId("4")
+    @DisplayName("Проверка, что пароль скрывается, если нажать на глазик два раза ")
+    fun testPasswordIsObfuscated() {
+
+        NavigationBar {
+            clickMoreButton()
+        }
+
+        BottomSheet {
+            clickLoginButton()
+        }
+
+        CreateAccountScreen {
+            typePassword("pass12345")
+            checkPasswordIsObfuscated()
         }
     }
 
@@ -134,21 +165,20 @@ class Tests {
             typeRepeatPassword("pass12")
             typeEmail("smth.email@gmail.com")
             clickNextButton()
-
+            checkErrorMessageColor()
         }
+
+
     }
 
 
-
-
-
-    private fun checkBrowserOpened() {
-        step("Проверяем, что браузер открылся") {
-            val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-            val currentPackage = device.currentPackageName
-            assertEquals("Browser is not opened", CHROME_PACKAGE, currentPackage)
+        private fun checkBrowserOpened() {
+            step("Проверяем, что браузер открылся") {
+                val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+                val currentPackage = device.currentPackageName
+                assertEquals("Browser is not opened", CHROME_PACKAGE, currentPackage)
+            }
         }
-    }
 
 
 
