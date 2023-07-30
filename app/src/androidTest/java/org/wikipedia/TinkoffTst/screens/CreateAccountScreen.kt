@@ -1,13 +1,12 @@
 package org.wikipedia.TinkoffTst.screens
 
-import android.graphics.Color
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.replaceText
+import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Checks
 import androidx.test.espresso.matcher.BoundedMatcher
@@ -20,38 +19,34 @@ import org.hamcrest.Matchers.allOf
 import org.wikipedia.R
 
 class CreateAccountScreen {
-    private val usernameEditText by lazy { onView(withHint("Username")) }
-    private val passwordEditText by lazy { onView(withHint("Password")) }
-    private val repeatPasswordEditText by lazy { onView(withHint("Repeat password")) }
-    private val emailEditText by lazy { onView(withHint("Email (Optional)")) }
+    private val usernameEditText by lazy { onView(withHint(R.string.create_account_username_hint)) }
+    private val passwordEditText by lazy { onView(withHint(R.string.account_creation_password_hint)) }
+    private val repeatPasswordEditText by lazy { onView(withHint(R.string.create_account_password_repeat_hint)) }
+    private val emailEditText by lazy { onView(withHint(R.string.create_account_email_hint)) }
     private val nextButton by lazy { onView(withId(R.id.create_account_submit_button)) }
-    private val errorMessageColor by lazy { onView(withId(R.id.create_account_password_input)) }
+    private val errorMessageTextView by lazy { onView(withId(R.id.create_account_password_input)) }
 
     fun typeUsername(username: String) {
         usernameEditText.perform(
-            click(),
-            replaceText(username)
+            typeText(username)
             )
     }
 
     fun typePassword(password: String) {
         passwordEditText.perform(
-            click(),
-            replaceText(password)
+            typeText(password)
         )
     }
 
     fun typeRepeatPassword(repeatPassword: String) {
         repeatPasswordEditText.perform(
-            click(),
-            replaceText(repeatPassword)
+            typeText(repeatPassword)
         )
     }
 
     fun typeEmail(email: String) {
         emailEditText.perform(
-            click(),
-            replaceText(email)
+            typeText(email)
         )
     }
 
@@ -69,7 +64,7 @@ class CreateAccountScreen {
     }
 
     fun checkErrorMessageColor(){
-            errorMessageColor.check(matches(allOf(isDisplayed(), withTextColor(Color.RED))))
+        errorMessageTextView.check(matches(allOf(isDisplayed(), withTextColor(R.color.red700))))
     }
 
     private fun withTextColor(expectedColor: Int): BoundedMatcher<View?, TextView> {

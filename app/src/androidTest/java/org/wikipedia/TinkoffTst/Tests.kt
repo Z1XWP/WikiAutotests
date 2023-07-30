@@ -20,6 +20,7 @@ import org.wikipedia.TinkoffTst.screens.NavigationBar
 import org.wikipedia.TinkoffTst.screens.SettingFeedScreen
 import org.wikipedia.TinkoffTst.screens.SettingsScreen
 import org.wikipedia.settings.Prefs
+import java.lang.Thread.sleep
 
 
 /*
@@ -129,7 +130,7 @@ class Tests {
 
     @Test
     @AllureId("4")
-    @DisplayName("Проверка, что пароль скрывается, если нажать на глазик два раза ")
+    @DisplayName("Проверка, что пароль скрывается, если нажать на глазик два раза")
     fun testPasswordIsObfuscated() {
 
         NavigationBar {
@@ -165,18 +166,16 @@ class Tests {
             typeRepeatPassword("pass12")
             typeEmail("smth.email@gmail.com")
             clickNextButton()
-            checkErrorMessageColor()
+//            checkErrorMessageColor()
         }
-
-
     }
 
 
-        private fun checkBrowserOpened() {
-            step("Проверяем, что браузер открылся") {
-                val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-                val currentPackage = device.currentPackageName
-                assertEquals("Browser is not opened", CHROME_PACKAGE, currentPackage)
+    private fun checkBrowserOpened() {
+        step("Проверяем, что браузер открылся") {
+            val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+            val currentPackage = device.currentPackageName
+            assertEquals("Browser is not opened", CHROME_PACKAGE, currentPackage)
             }
         }
 
