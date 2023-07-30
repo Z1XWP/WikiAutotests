@@ -1,4 +1,4 @@
-package org.wikipedia.TinkoffTst
+package org.wikipedia.tinkofftst
 
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -12,15 +12,14 @@ import junit.framework.TestCase.assertEquals
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
-import org.wikipedia.TinkoffTst.screens.AboutScreen
+import org.wikipedia.tinkofftst.screens.AboutScreen
 import org.wikipedia.main.MainActivity
-import org.wikipedia.TinkoffTst.screens.BottomSheet
-import org.wikipedia.TinkoffTst.screens.CreateAccountScreen
-import org.wikipedia.TinkoffTst.screens.NavigationBar
-import org.wikipedia.TinkoffTst.screens.SettingFeedScreen
-import org.wikipedia.TinkoffTst.screens.SettingsScreen
+import org.wikipedia.tinkofftst.screens.BottomSheet
+import org.wikipedia.tinkofftst.screens.CreateAccountScreen
+import org.wikipedia.tinkofftst.screens.NavigationBar
+import org.wikipedia.tinkofftst.screens.SettingFeedScreen
+import org.wikipedia.tinkofftst.screens.SettingsScreen
 import org.wikipedia.settings.Prefs
-import java.lang.Thread.sleep
 
 
 /*
@@ -125,7 +124,7 @@ class Tests {
             checkTranslatorsIsDisplayed()
             checkLicenseIsDisplayed()
         }
-        
+
     }
 
     @Test
@@ -142,7 +141,7 @@ class Tests {
         }
 
         CreateAccountScreen {
-            typePassword("pass12345")
+            typePassword()
             checkPasswordIsObfuscated()
         }
     }
@@ -161,12 +160,12 @@ class Tests {
         }
 
         CreateAccountScreen {
-            typeUsername("Smth.username")
-            typePassword("pass12")
-            typeRepeatPassword("pass12")
-            typeEmail("smth.email@gmail.com")
+            typeUsername()
+            typePassword()
+            typeRepeatPassword()
+            typeEmail()
             clickNextButton()
-//            checkErrorMessageColor()
+            checkErrorMessageColor()
         }
     }
 
@@ -176,10 +175,8 @@ class Tests {
             val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
             val currentPackage = device.currentPackageName
             assertEquals("Browser is not opened", CHROME_PACKAGE, currentPackage)
-            }
         }
-
-
+    }
 
 
     companion object {

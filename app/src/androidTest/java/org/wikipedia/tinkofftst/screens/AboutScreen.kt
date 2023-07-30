@@ -1,7 +1,6 @@
-package org.wikipedia.TinkoffTst.screens
+package org.wikipedia.tinkofftst.screens
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -20,13 +19,13 @@ class AboutScreen {
     }
 
     fun checkTranslatorsIsDisplayed() {
-        step("Проверяем, что поле \"Переводчики\" отобразилось"){
+        step("Проверяем, что поле \"Переводчики\" отобразилось") {
             translatorsTextView.check(matches(isDisplayed()))
         }
     }
 
     fun checkLicenseIsDisplayed() {
-        step("Проверяем, что поле \"Лицензия\" отобразилось"){
+        step("Проверяем, что поле \"Лицензия\" отобразилось") {
             licenseTextView.check(matches(isDisplayed()))
         }
     }
@@ -37,4 +36,5 @@ class AboutScreen {
             AboutScreen().block()
         }
     }
+
 }

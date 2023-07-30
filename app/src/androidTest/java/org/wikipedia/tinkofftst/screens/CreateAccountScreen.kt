@@ -1,4 +1,4 @@
-package org.wikipedia.TinkoffTst.screens
+package org.wikipedia.tinkofftst.screens
 
 import android.text.method.PasswordTransformationMethod
 import android.view.View
@@ -15,6 +15,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withHint
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import junit.framework.TestCase.assertTrue
 import org.hamcrest.Description
+import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.wikipedia.R
 
@@ -26,27 +27,27 @@ class CreateAccountScreen {
     private val nextButton by lazy { onView(withId(R.id.create_account_submit_button)) }
     private val errorMessageTextView by lazy { onView(withId(R.id.create_account_password_input)) }
 
-    fun typeUsername(username: String) {
+    fun typeUsername() {
         usernameEditText.perform(
-            typeText(username)
-            )
+            typeText(USERNAME)
+        )
     }
 
-    fun typePassword(password: String) {
+    fun typePassword() {
         passwordEditText.perform(
-            typeText(password)
+            typeText(PASSWORD)
         )
     }
 
-    fun typeRepeatPassword(repeatPassword: String) {
+    fun typeRepeatPassword() {
         repeatPasswordEditText.perform(
-            typeText(repeatPassword)
+            typeText(PASSWORD)
         )
     }
 
-    fun typeEmail(email: String) {
+    fun typeEmail() {
         emailEditText.perform(
-            typeText(email)
+            typeText(EMAIL)
         )
     }
 
@@ -54,25 +55,33 @@ class CreateAccountScreen {
         nextButton.perform(click())
     }
 
-    fun checkPasswordIsObfuscated(){
-            passwordEditText.check { view, _ ->
-                assertTrue(
-                    "PasswordTransformationMethod should be set",
-                    (view as EditText).transformationMethod is PasswordTransformationMethod
+    fun checkPasswordIsObfuscated() {
+        passwordEditText.check { view, _ ->
+            assertTrue(
+                "PasswordTransformationMethod should be set",
+                (view as EditText).transformationMethod is PasswordTransformationMethod
+            )
+        }
+    }
+
+    fun checkErrorMessageColor() {
+        errorMessageTextView.check(
+            matches(
+                allOf(
+                    isDisplayed(),
+                    withTextColor(R.attr.destructive_color)
                 )
-            }
+            )
+        )
     }
 
-    fun checkErrorMessageColor(){
-        errorMessageTextView.check(matches(allOf(isDisplayed(), withTextColor(R.color.red700))))
-    }
-
-    private fun withTextColor(expectedColor: Int): BoundedMatcher<View?, TextView> {
+    private fun withTextColor(expectedColor: Int): Matcher<View?> {
         Checks.checkNotNull(expectedColor)
         return object : BoundedMatcher<View?, TextView>(TextView::class.java) {
             override fun matchesSafely(textView: TextView): Boolean {
                 return expectedColor == textView.currentTextColor
             }
+
             override fun describeTo(description: Description) {
                 description.appendText("with text color: ")
                 description.appendValue(expectedColor)
@@ -80,7 +89,10 @@ class CreateAccountScreen {
         }
     }
 
-    companion object{
+    companion object {
+        private const val USERNAME = "Smth.username"
+        private const val PASSWORD = "pass12"
+        private const val EMAIL = "smth.email@gmail.com"
         inline operator fun invoke(crossinline block: CreateAccountScreen.() -> Unit) {
             CreateAccountScreen().block()
         }

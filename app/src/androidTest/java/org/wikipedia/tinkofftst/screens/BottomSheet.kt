@@ -1,4 +1,4 @@
-package org.wikipedia.TinkoffTst.screens
+package org.wikipedia.tinkofftst.screens
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -23,7 +23,7 @@ class BottomSheet {
         }
     }
 
-    fun clickLoginButton()  {
+    fun clickLoginButton() {
         step("Нажимаем на кнопку \"Создать учётную запись\"") {
             loginButton.perform(click())
         }
@@ -34,4 +34,5 @@ class BottomSheet {
             BottomSheet().block()
         }
     }
+
 }
