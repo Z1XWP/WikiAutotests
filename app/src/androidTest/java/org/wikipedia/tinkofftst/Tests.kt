@@ -12,6 +12,7 @@ import junit.framework.TestCase.assertEquals
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
+import org.wikipedia.tinkofftst.screens.SearchScreen
 import org.wikipedia.tinkofftst.screens.AboutScreen
 import org.wikipedia.main.MainActivity
 import org.wikipedia.tinkofftst.screens.BottomSheet
@@ -169,6 +170,15 @@ class Tests {
         }
     }
 
+    @Test
+    @AllureId("6")
+    @DisplayName("Проверка добавления статьи в избранное")
+    fun testCheckAddArticleToFavorites() {
+
+        SearchScreen{
+            typeInSearchBar()
+        }
+    }
 
     private fun checkBrowserOpened() {
         step("Проверяем, что браузер открылся") {

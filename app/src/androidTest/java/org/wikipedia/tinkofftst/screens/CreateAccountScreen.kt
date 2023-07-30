@@ -3,7 +3,6 @@ package org.wikipedia.tinkofftst.screens
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
@@ -13,11 +12,14 @@ import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withHint
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import com.google.android.material.textfield.TextInputLayout
 import junit.framework.TestCase.assertTrue
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.wikipedia.R
+import org.wikipedia.util.ResourceUtil.getThemedColor
+
 
 class CreateAccountScreen {
     private val usernameEditText by lazy { onView(withHint(R.string.create_account_username_hint)) }
@@ -77,9 +79,9 @@ class CreateAccountScreen {
 
     private fun withTextColor(expectedColor: Int): Matcher<View?> {
         Checks.checkNotNull(expectedColor)
-        return object : BoundedMatcher<View?, TextView>(TextView::class.java) {
-            override fun matchesSafely(textView: TextView): Boolean {
-                return expectedColor == textView.currentTextColor
+        return object : BoundedMatcher<View?, TextInputLayout>(TextInputLayout::class.java) {
+            override fun matchesSafely(item: TextInputLayout?): Boolean {
+                return expectedColor == item?.errorCurrentTextColors
             }
 
             override fun describeTo(description: Description) {
@@ -88,6 +90,7 @@ class CreateAccountScreen {
             }
         }
     }
+
 
     companion object {
         private const val DEFAULT_USERNAME = "Smth.username"
