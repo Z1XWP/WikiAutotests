@@ -27,27 +27,27 @@ class CreateAccountScreen {
     private val nextButton by lazy { onView(withId(R.id.create_account_submit_button)) }
     private val errorMessageTextView by lazy { onView(withId(R.id.create_account_password_input)) }
 
-    fun typeUsername() {
+    fun typeUsername(username: String = DEFAULT_USERNAME) {
         usernameEditText.perform(
-            typeText(USERNAME)
+            typeText(username)
         )
     }
 
-    fun typePassword() {
+    fun typePassword(password: String = DEFAULT_PASSWORD) {
         passwordEditText.perform(
-            typeText(PASSWORD)
+            typeText(password)
         )
     }
 
-    fun typeRepeatPassword() {
+    fun typeRepeatPassword(password: String = DEFAULT_PASSWORD) {
         repeatPasswordEditText.perform(
-            typeText(PASSWORD)
+            typeText(password)
         )
     }
 
-    fun typeEmail() {
+    fun typeEmail(email: String = DEFAULT_EMAIL) {
         emailEditText.perform(
-            typeText(EMAIL)
+            typeText(email)
         )
     }
 
@@ -90,9 +90,9 @@ class CreateAccountScreen {
     }
 
     companion object {
-        private const val USERNAME = "Smth.username"
-        private const val PASSWORD = "pass12"
-        private const val EMAIL = "smth.email@gmail.com"
+        private const val DEFAULT_USERNAME = "Smth.username"
+        private const val DEFAULT_PASSWORD = "pass12"
+        private const val DEFAULT_EMAIL = "smth.email@gmail.com"
         inline operator fun invoke(crossinline block: CreateAccountScreen.() -> Unit) {
             CreateAccountScreen().block()
         }
