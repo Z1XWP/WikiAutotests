@@ -27,24 +27,18 @@ class SettingFeedScreen {
 
     fun checkAllSwitches() {
         step("Проверяем, что все переключатели активны") {
-            switchTitles.forEach { title ->
-                isSwitchCheckedByTitle(title)
-            }
+             isSwitchCheckedByTitle(R.string.view_featured_article_card_title)
+             isSwitchCheckedByTitle(R.string.view_top_read_card_title)
+             isSwitchCheckedByTitle(R.string.view_featured_image_card_title)
+             isSwitchCheckedByTitle(R.string.view_because_you_read_card_title)
+             isSwitchCheckedByTitle(R.string.view_card_news_title)
+             isSwitchCheckedByTitle(R.string.on_this_day_card_title)
+             isSwitchCheckedByTitle(R.string.view_random_card_title)
+             isSwitchCheckedByTitle(R.string.view_main_page_card_title)
         }
     }
 
     companion object {
-        private val switchTitles = listOf(
-            R.string.view_featured_article_card_title,
-            R.string.view_top_read_card_title,
-            R.string.view_featured_image_card_title,
-            R.string.view_because_you_read_card_title,
-            R.string.view_card_news_title,
-            R.string.on_this_day_card_title,
-            R.string.view_random_card_title,
-            R.string.view_main_page_card_title,
-        )
-
         inline operator fun invoke(crossinline block: SettingFeedScreen.() -> Unit) {
             SettingFeedScreen().block()
         }
