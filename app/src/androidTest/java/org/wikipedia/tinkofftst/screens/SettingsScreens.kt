@@ -1,4 +1,4 @@
-package org.wikipedia.TinkoffTst.screens
+package org.wikipedia.tinkofftst.screens
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView

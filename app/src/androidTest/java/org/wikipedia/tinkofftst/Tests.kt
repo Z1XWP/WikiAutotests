@@ -1,4 +1,5 @@
-package org.wikipedia.TinkoffTst
+package org.wikipedia.tinkofftst
+
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
@@ -11,39 +12,14 @@ import junit.framework.TestCase.assertEquals
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
-import org.wikipedia.TinkoffTst.screens.AboutScreen
+import org.wikipedia.tinkofftst.screens.AboutScreen
 import org.wikipedia.main.MainActivity
-import org.wikipedia.TinkoffTst.screens.BottomSheet
-import org.wikipedia.TinkoffTst.screens.CreateAccountScreen
-import org.wikipedia.TinkoffTst.screens.NavigationBar
-import org.wikipedia.TinkoffTst.screens.SettingFeedScreen
-import org.wikipedia.TinkoffTst.screens.SettingsScreen
+import org.wikipedia.tinkofftst.screens.BottomSheet
+import org.wikipedia.tinkofftst.screens.CreateAccountScreen
+import org.wikipedia.tinkofftst.screens.NavigationBar
+import org.wikipedia.tinkofftst.screens.SettingFeedScreen
+import org.wikipedia.tinkofftst.screens.SettingsScreen
 import org.wikipedia.settings.Prefs
-
-
-
-/*
-Проверка перехода в браузер
-+ 1. Открываем приложение
-+ 2. Нажимаем на кнопку "Еще"
-+ 3. Нажимаем кнопку "Пожертвовать"
-+ 4. Проверяем, что случился переход на окно выбора браузера для открытия
------------------------------------------------------------------------------
-Проверка настройки ленты по умолчанию
-+ 1. Открываем приложение
-+ 2. Нажимаем на кнопку "Еще"
-+ 3. Нажимаем кнопку "Настройки"
-+ 4. Нажимаем на кнопку "Настройки ленты"
-+ 5. Проверяем, что каждый чек-бокс в состоянии checked
-Не забываем про правило один кейс — одна проверка :wink:
------------------------------------------------------------------------------
-Проверка блоков на экране "О приложении"
-+ 1. Открываем приложение
-+ 2. Нажимаем "Еще"
-+ 3. Нажимаем настройки
-+ 4. Нажимаем на "О приложении "Википедия""
-+ 5. Проверяем, что на экране есть блок "Авторы", "Переводчики" и "Лицензия"
- */
 
 @Epic("Tinkoff")
 
@@ -95,6 +71,7 @@ class Tests {
     @AllureId("3")
     @DisplayName("Проверка блоков на экране \"О приложении\"")
     fun testCheckBlocksOnAboutAppScreen() {
+
         NavigationBar {
             clickMoreButton()
         }
@@ -113,6 +90,29 @@ class Tests {
             checkTranslatorsIsDisplayed()
             checkLicenseIsDisplayed()
         }
+
+    }
+
+    @Test
+    @AllureId("4")
+    @DisplayName("Проверка, что пароль скрывается, если нажать на глазик два раза")
+    fun testPasswordIsObfuscated() {
+
+        NavigationBar {
+            clickMoreButton()
+        }
+
+        BottomSheet {
+            clickLoginButton()
+        }
+
+        CreateAccountScreen {
+            typePassword()
+            clickObfuscatePasswordButton()
+            checkPasswordIsNotObfuscated()
+            clickObfuscatePasswordButton()
+            checkPasswordIsObfuscated()
+        }
     }
 
     @Test
@@ -129,19 +129,25 @@ class Tests {
         }
 
         CreateAccountScreen {
-            typeUsername("Smth.username")
-            typePassword("pass12")
-            typeRepeatPassword("pass12")
-            typeEmail("smth.email@gmail.com")
+            typeUsername()
+            typePassword()
+            typeRepeatPassword()
+            typeEmail()
             clickNextButton()
-
+            checkErrorMessageColor()
         }
     }
 
+/*    @Test
+    @AllureId("6")
+    @DisplayName("Проверка добавления статьи в избранное")
+    fun testCheckAddArticleToFavorites() {
 
-
-
-
+        SearchScreen{
+            typeInSearchBar()
+        }
+    }
+*/
     private fun checkBrowserOpened() {
         step("Проверяем, что браузер открылся") {
             val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -149,8 +155,6 @@ class Tests {
             assertEquals("Browser is not opened", CHROME_PACKAGE, currentPackage)
         }
     }
-
-
 
 
     companion object {

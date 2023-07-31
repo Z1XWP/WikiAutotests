@@ -1,4 +1,4 @@
-package org.wikipedia.TinkoffTst.screens
+package org.wikipedia.tinkofftst.screens
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -20,4 +20,5 @@ class NavigationBar {
             NavigationBar().block()
         }
     }
+
 }

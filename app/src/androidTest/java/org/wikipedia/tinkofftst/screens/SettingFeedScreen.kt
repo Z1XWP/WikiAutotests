@@ -1,4 +1,4 @@
-package org.wikipedia.TinkoffTst.screens
+package org.wikipedia.tinkofftst.screens
 
 import androidx.annotation.StringRes
 import androidx.test.espresso.Espresso.onView
@@ -16,7 +16,8 @@ class SettingFeedScreen {
 
 
     private fun isSwitchCheckedByTitle(@StringRes title: Int) {
-        onView(allOf(
+        onView(
+            allOf(
                 withId(R.id.feed_content_type_checkbox),
                 hasSibling(hasDescendant(withText(title)))
 
@@ -34,19 +35,19 @@ class SettingFeedScreen {
 
     companion object {
         private val switchTitles = listOf(
-                R.string.view_featured_article_card_title,
-                R.string.view_top_read_card_title,
-                R.string.view_featured_image_card_title,
-                R.string.view_because_you_read_card_title,
-                R.string.view_card_news_title,
-                R.string.on_this_day_card_title,
-                R.string.view_random_card_title,
-                R.string.view_main_page_card_title,
+            R.string.view_featured_article_card_title,
+            R.string.view_top_read_card_title,
+            R.string.view_featured_image_card_title,
+            R.string.view_because_you_read_card_title,
+            R.string.view_card_news_title,
+            R.string.on_this_day_card_title,
+            R.string.view_random_card_title,
+            R.string.view_main_page_card_title,
         )
+
         inline operator fun invoke(crossinline block: SettingFeedScreen.() -> Unit) {
             SettingFeedScreen().block()
         }
     }
-
 
 }
