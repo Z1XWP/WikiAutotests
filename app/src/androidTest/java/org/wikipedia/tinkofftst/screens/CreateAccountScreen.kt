@@ -41,13 +41,13 @@ class CreateAccountScreen {
         )
     }
 
-    fun typePassword(password: String = DEFAULT_PASSWORD) {
+    fun typePassword(password: String = INVALID_PASSWORD) {
         passwordEditText.perform(
             typeText(password)
         )
     }
 
-    fun typeRepeatPassword(password: String = DEFAULT_PASSWORD) {
+    fun typeRepeatPassword(password: String = INVALID_PASSWORD) {
         repeatPasswordEditText.perform(
             typeText(password)
         )
@@ -88,7 +88,7 @@ class CreateAccountScreen {
 
     companion object {
         private const val DEFAULT_USERNAME = "Smth.username"
-        private const val DEFAULT_PASSWORD = "pass12"
+        private const val INVALID_PASSWORD = "pass12"
         private const val DEFAULT_EMAIL = "smth.email@gmail.com"
         private const val PASSWORD_EYE_BUTTON_ID = 2131297700
         inline operator fun invoke(crossinline block: CreateAccountScreen.() -> Unit) {
