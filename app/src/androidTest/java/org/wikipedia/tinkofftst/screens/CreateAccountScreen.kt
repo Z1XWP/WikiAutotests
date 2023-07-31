@@ -80,8 +80,9 @@ class CreateAccountScreen {
     private fun withTextColor(expectedColor: Int): Matcher<View?> {
         Checks.checkNotNull(expectedColor)
         return object : BoundedMatcher<View?, TextInputLayout>(TextInputLayout::class.java) {
-            override fun matchesSafely(item: TextInputLayout?): Boolean {
-                return expectedColor == item?.errorCurrentTextColors
+            override fun matchesSafely(item: TextInputLayout): Boolean {
+                val convertedColor = getThemedColor(item.context, expectedColor)
+                return convertedColor == item.errorCurrentTextColors
             }
 
             override fun describeTo(description: Description) {
