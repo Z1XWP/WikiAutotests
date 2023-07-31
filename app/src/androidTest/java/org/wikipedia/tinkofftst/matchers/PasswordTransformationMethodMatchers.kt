@@ -22,6 +22,6 @@ object PasswordTransformationMethodMatchers {
         }
     }
 
-    fun hasNotPasswordTransformation() = not(hasPasswordTransformation())
+    fun hasNotPasswordTransformation(): Matcher<View> = not(hasPasswordTransformation())
 
 }

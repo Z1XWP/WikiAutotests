@@ -1,32 +1,22 @@
 package org.wikipedia.tinkofftst.screens
 
-import android.text.method.PasswordTransformationMethod
-import android.view.View
-import android.widget.EditText
+
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.intent.Checks
-import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.espresso.matcher.ViewMatchers.hasSibling
 import androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isFocused
 import androidx.test.espresso.matcher.ViewMatchers.withHint
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import com.google.android.material.internal.CheckableImageButton
-import com.google.android.material.textfield.TextInputLayout
-import junit.framework.TestCase.assertTrue
-import org.hamcrest.Description
-import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.instanceOf
 import org.wikipedia.R
 import org.wikipedia.tinkofftst.matchers.PasswordTransformationMethodMatchers.hasNotPasswordTransformation
 import org.wikipedia.tinkofftst.matchers.PasswordTransformationMethodMatchers.hasPasswordTransformation
 import org.wikipedia.tinkofftst.matchers.TextColorMatchers.withTextColor
-import org.wikipedia.util.ResourceUtil.getThemedColor
+
 
 
 class CreateAccountScreen {
