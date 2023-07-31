@@ -25,7 +25,7 @@ object ResourceUtil {
         return vectorDrawable.toBitmap()
     }
 
-    fun getThemedAttribute(context: Context, @AttrRes id: Int): TypedValue? {
+    private fun getThemedAttribute(context: Context, @AttrRes id: Int): TypedValue? {
         val typedValue = TypedValue()
         return if (context.theme.resolveAttribute(id, typedValue, true)) {
             typedValue
