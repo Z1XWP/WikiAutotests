@@ -3,7 +3,7 @@ package org.wikipedia.tinkofftst.screens
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.hasSibling
 import androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA
@@ -37,25 +37,25 @@ class CreateAccountScreen {
 
     fun typeUsername(username: String = DEFAULT_USERNAME) {
         usernameEditText.perform(
-            typeText(username)
+            replaceText(username)
         )
     }
 
     fun typePassword(password: String = INVALID_PASSWORD) {
         passwordEditText.perform(
-            typeText(password)
+            replaceText(password)
         )
     }
 
     fun typeRepeatPassword(password: String = INVALID_PASSWORD) {
         repeatPasswordEditText.perform(
-            typeText(password)
+            replaceText(password)
         )
     }
 
     fun typeEmail(email: String = DEFAULT_EMAIL) {
         emailEditText.perform(
-            typeText(email)
+            replaceText(email)
         )
     }
 

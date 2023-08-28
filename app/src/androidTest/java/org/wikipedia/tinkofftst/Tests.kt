@@ -12,6 +12,7 @@ import junit.framework.TestCase.assertEquals
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
+import org.wikipedia.language.AppLanguageState
 import org.wikipedia.tinkofftst.screens.AboutScreen
 import org.wikipedia.main.MainActivity
 import org.wikipedia.tinkofftst.screens.BottomSheet
@@ -20,6 +21,11 @@ import org.wikipedia.tinkofftst.screens.NavigationBar
 import org.wikipedia.tinkofftst.screens.SettingFeedScreen
 import org.wikipedia.tinkofftst.screens.SettingsScreen
 import org.wikipedia.settings.Prefs
+import org.wikipedia.settings.Prefs.appLanguageCodeList
+import org.wikipedia.tinkofftst.screens.LanguagesScreen
+import org.wikipedia.tinkofftst.screens.SearchScreen
+import java.lang.Thread.sleep
+import java.util.Locale
 
 @Epic("Tinkoff")
 
@@ -138,16 +144,29 @@ class Tests {
         }
     }
 
-/*    @Test
+    @Test
     @AllureId("6")
     @DisplayName("Проверка добавления статьи в избранное")
     fun testCheckAddArticleToFavorites() {
 
-        SearchScreen{
-            typeInSearchBar()
+
+        SearchScreen {
+
+            clickSearchBar()
+            clickLangButton()
         }
+        //sleep(50000000000000)
+        LanguagesScreen {
+            clickAddLanguageButton()
+            clickToSelectLanguage()
+        }
+
+        /*SearchScreen {
+            clickToSelectedLanguageButton()
+            typeInSearchBar()
+        }*/
     }
-*/
+
     private fun checkBrowserOpened() {
         step("Проверяем, что браузер открылся") {
             val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -163,11 +182,14 @@ class Tests {
 
         @JvmStatic
         @BeforeClass
+
         fun initialOnboardingSkip() {
             Prefs.isInitialOnboardingEnabled = false
-        }
-    }
 
+        }
+
+
+    }
 
 }
 
