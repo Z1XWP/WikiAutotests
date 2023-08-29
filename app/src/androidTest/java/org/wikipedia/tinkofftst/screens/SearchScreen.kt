@@ -16,22 +16,13 @@ import org.wikipedia.R
 
 class SearchScreen {
     private val searchBarView by lazy { onView(withId(R.id.search_container)) }
-    private val langButton by lazy { onView(withId(R.id.search_lang_button)) }
-    private val selectedLanguageButton by lazy { onView(withText(SELECTED_LANGUAGE)) }
-    private val searchBarViewText by lazy { onView((withId(R.id.search_cab_view))) }
+    private val searchBarViewText by lazy { onView((withHint(R.string.search_hint))) }
 
 
     fun clickSearchBar() {
         searchBarView.perform(click())
     }
 
-    fun clickLangButton() {
-        langButton.perform(doubleClick())
-    }
-
-    fun clickToSelectedLanguageButton() {
-        selectedLanguageButton.perform(click())
-    }
 
     fun typeInSearchBar(request: String = DEFAULT_REQUEST) {
         searchBarViewText.perform(replaceText(request))
@@ -40,7 +31,6 @@ class SearchScreen {
 
     companion object {
         private const val DEFAULT_REQUEST = "Тинькофф премьер лига"
-        private const val SELECTED_LANGUAGE = "русский"
 
         inline operator fun invoke(crossinline block: SearchScreen.() -> Unit) {
             SearchScreen().block()

@@ -12,7 +12,7 @@ import junit.framework.TestCase.assertEquals
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
-import org.wikipedia.language.AppLanguageState
+import org.wikipedia.WikipediaApp
 import org.wikipedia.tinkofftst.screens.AboutScreen
 import org.wikipedia.main.MainActivity
 import org.wikipedia.tinkofftst.screens.BottomSheet
@@ -21,11 +21,8 @@ import org.wikipedia.tinkofftst.screens.NavigationBar
 import org.wikipedia.tinkofftst.screens.SettingFeedScreen
 import org.wikipedia.tinkofftst.screens.SettingsScreen
 import org.wikipedia.settings.Prefs
-import org.wikipedia.settings.Prefs.appLanguageCodeList
-import org.wikipedia.tinkofftst.screens.LanguagesScreen
 import org.wikipedia.tinkofftst.screens.SearchScreen
 import java.lang.Thread.sleep
-import java.util.Locale
 
 @Epic("Tinkoff")
 
@@ -153,18 +150,9 @@ class Tests {
         SearchScreen {
 
             clickSearchBar()
-            clickLangButton()
-        }
-        //sleep(50000000000000)
-        LanguagesScreen {
-            clickAddLanguageButton()
-            clickToSelectLanguage()
-        }
-
-        /*SearchScreen {
-            clickToSelectedLanguageButton()
             typeInSearchBar()
-        }*/
+            sleep(50000000000000)
+        }
     }
 
     private fun checkBrowserOpened() {
@@ -185,7 +173,8 @@ class Tests {
 
         fun initialOnboardingSkip() {
             Prefs.isInitialOnboardingEnabled = false
-
+            var app = WikipediaApp.instance
+            app.languageState.setAppLanguageCodes(listOf("ru"))
         }
 
 
