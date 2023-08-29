@@ -21,6 +21,7 @@ import org.wikipedia.tinkofftst.screens.NavigationBar
 import org.wikipedia.tinkofftst.screens.SettingFeedScreen
 import org.wikipedia.tinkofftst.screens.SettingsScreen
 import org.wikipedia.settings.Prefs
+import org.wikipedia.settings.Prefs.isMultilingualSearchTooltipShown
 import org.wikipedia.tinkofftst.screens.SearchScreen
 import java.lang.Thread.sleep
 
@@ -171,7 +172,8 @@ class Tests {
         @JvmStatic
         @BeforeClass
 
-        fun initialOnboardingSkip() {
+        fun preparingAppToTesting() {
+            isMultilingualSearchTooltipShown = false
             Prefs.isInitialOnboardingEnabled = false
             var app = WikipediaApp.instance
             app.languageState.setAppLanguageCodes(listOf("ru"))
